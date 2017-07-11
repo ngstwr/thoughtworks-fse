@@ -1,5 +1,300 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans,
+    Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
 }
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+ul > li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #232426;
+}
+
+button {
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+  text-decoration: none;
+}
+
+input, textarea, select {
+  outline: none;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.container{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-container{
+  display: block;
+  margin-top: 55px;
+}
+
+.hidden-xs {
+  display: none;
+}
+
+.visible-xs {
+  display: block;
+}
+
+.widget {
+  background: none;
+}
+
+.widget + .widget{
+  margin-top: 15px;
+}
+
+@media only screen and (min-width : 992px) {
+  .container{
+    width: 1170px;
+  }
+
+  .hidden-lg {
+    display: none;
+  }
+
+  .visible-lg {
+    display: block;
+  }
+}
+
+
+/* header css */
+  header {
+    background: #702269;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+    height: 40px;
+  }
+
+  .header-wrapper h1 {
+    margin: 0;
+    line-height: 40px;
+    letter-spacing: 1px;
+  }
+
+  .header-wrapper h1 > .symbol{
+    background: rgba(0,0,0,0.1);
+    display: inline-block;
+    line-height: 40px;
+    padding: 0 8px;
+    margin-right: 2px;
+  }
+
+  .toggle-buttons {
+    display: flex;
+    margin: 0;
+  }
+
+  .toggle-buttons > .btn{
+    font-size: 14px;
+    padding: 4px 20px;
+    background: none;
+    color: #ffffff;
+  }
+
+
+/* travel plan widget css */
+  .travel-plan-widget form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    display: none;
+  }
+
+  .button-tabs{
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-tabs .btn{
+    flex-grow: 1;
+    background: #f5f6f7;
+    border: 1px solid #f1f2f3;
+  }
+
+  .button-tabs .btn.active{
+    background: #ead9e9;
+    border-color: #ead9e9;
+  }
+
+  .form-elements{
+    background: #ead9e9;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-elements > .form-element{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-elements > .form-element > label{
+    margin-bottom: 5px;
+    font-size: 13px;
+    opacity: 0.6;
+  }
+
+  .form-elements > .form-element + .form-element{
+    margin-top: 15px;
+  }
+
+  .form-elements .btn-search{
+    background: #702269;
+    color: #ffffff;
+    margin-top: 15px;
+    font-size: 16px;
+    padding: 12px;
+    font-weight: 500;
+  }
+
+/* Refine Search Widget css */
+  .refine-search-widget {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    display: none;
+  }
+
+/* Travel Summary css */
+  .travel-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: #dabad8;
+    color: rgba(0,0,0,0.7);
+  }
+
+  .travel-summary h2, .travel-summary p, .travel-summary label {
+    margin: 0;
+    color: inherit;
+  }
+
+  .travel-summary label, .travel-summary p {
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .travel-summary label {
+    font-weight: 700;
+  }
+
+  .travel-summary .origin-destination{
+    margin: 15px;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .travel-summary .depart-return{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 15px 15px;
+  }
+
+
+
+/* Flights Wrapper css */
+  .flights-wrapper {
+    display: block;
+    margin-top: 15px;
+  }
+
+  .flights-wrapper > .flight-card {
+    margin: 0 15px;
+    border: 1px solid #e1e2e3;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flights-wrapper > .flight-card + .flight-card{
+    margin-top: 15px;
+  }
+
+  .flight-card h3, .flight-card h4, .flight-card p, .flight-card label {
+    margin: 0;
+    color: inherit;
+  }
+
+  .flight-card h3{
+    font-size: 24px;
+    font-weight: 400;
+    color: green;
+  }
+
+  .flight-card .flight-details-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    margin: -5px;
+    margin-top: 10px;
+  }
+
+  .flight-card .flight-details-wrapper .flight-details{
+    flex-grow: 1;
+    margin: 5px;
+  }
+
+  .flight-details > .flight-code {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.6;
+  }
+  .flight-details > .origin-destination, .flight-details > .depart-time, .flight-details > .arrive-time {
+    margin-top: 5px;
+    font-size: inherit;
+  }
+  .flight-details label, .flight-details p {
+    display: inline-block;
+  }
+
+  .flight-card aside{
+    display: flex;
+    justify-content: space-between;
+    margin: -10px;
+    margin-top: 15px;
+    background: #f1f2f3;
+  }
+
+  .flight-card aside > .airline-logo{
+    min-width: 100px;
+  }
+
+  .flight-card aside > .btn-book{
+    padding: 10px 20px;
+    background: #702269;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
