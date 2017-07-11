@@ -27,6 +27,7 @@ button {
   font-size: 14px;
   outline: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
 input, textarea, select {
@@ -68,6 +69,21 @@ input, textarea, select {
 @media only screen and (min-width : 992px) {
   .container{
     width: 1170px;
+  }
+
+  .page-container{
+    display: flex;
+    margin-top: 85px;
+  }
+
+  .page-container .sidebar{
+    flex-grow: 1;
+    margin-right: 15px;
+  }
+
+  .page-container .content{
+    flex-grow: 3;
+    margin-left: 15px;
   }
 
   .hidden-lg {
@@ -121,13 +137,24 @@ input, textarea, select {
     color: #ffffff;
   }
 
+  @media only screen and (min-width : 992px) {
+    .header-wrapper{
+      height: 55px;
+    }
+    .header-wrapper h1, .header-wrapper h1 > .symbol{
+      line-height: 55px;
+    }
+    .toggle-buttons{
+      display: none;
+    }
+  }
+
 
 /* travel plan widget css */
   .travel-plan-widget form{
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    display: none;
   }
 
   .button-tabs{
@@ -183,7 +210,6 @@ input, textarea, select {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    display: none;
   }
 
 /* Travel Summary css */
@@ -220,6 +246,19 @@ input, textarea, select {
     display: flex;
     justify-content: space-between;
     margin: 10px 15px 15px;
+  }
+
+  @media only screen and (min-width : 992px) {
+    .travel-summary {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .travel-summary .origin-destination{
+      border: none;
+    }
+    .travel-summary .depart-return .depart-date{
+      margin-right: 30px;
+    }
   }
 
 
@@ -296,5 +335,30 @@ input, textarea, select {
     background: #702269;
     color: #ffffff;
     font-weight: 500;
+    font-size: 16px;
     letter-spacing: 0.2px;
+  }
+
+  @media only screen and (min-width : 992px) {
+    .flights-wrapper > .flight-card {
+      flex-direction: row;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .flight-card .details{
+      flex-grow: 4;
+    }
+
+    .flight-card aside{
+      background: none;
+      flex-grow: 1;
+      flex-direction: column;
+      align-content: space-between;
+      margin: 0;
+    }
+
+    .flight-card aside > .btn-book{
+      margin-top: 10px;
+    }
   }
