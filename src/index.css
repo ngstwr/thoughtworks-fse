@@ -28,12 +28,20 @@ button {
   outline: none;
   text-decoration: none;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 input, textarea, select {
   outline: none;
-  padding: 5px 8px;
+  padding: 8px 10px;
   font-size: 13px;
+  border-radius: 3px;
+  background: rgba(81, 45, 168, 0.45);
+  border: 0px solid rgba(81, 45, 168, 0.35);
+  color: #ffffff;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder, input::placeholder, textarea::placeholder, select::placeholder {
+  color: white;
 }
 
 .text-center {
@@ -73,7 +81,7 @@ input, textarea, select {
 
   .page-container{
     display: flex;
-    margin-top: 85px;
+    margin-top: 95px;
   }
 
   .page-container .sidebar{
@@ -98,10 +106,11 @@ input, textarea, select {
 
 /* header css */
   header {
-    background: #702269;
+    background: #512DA8;
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 999;
   }
 
   .header-wrapper {
@@ -139,10 +148,10 @@ input, textarea, select {
 
   @media only screen and (min-width : 992px) {
     .header-wrapper{
-      height: 55px;
+      height: 65px;
     }
     .header-wrapper h1, .header-wrapper h1 > .symbol{
-      line-height: 55px;
+      line-height: 65px;
     }
     .toggle-buttons{
       display: none;
@@ -166,19 +175,21 @@ input, textarea, select {
     flex-grow: 1;
     background: #f5f6f7;
     border: 1px solid #f1f2f3;
+    border-radius: 0;
   }
 
   .button-tabs .btn.active{
-    background: #ead9e9;
-    border-color: #ead9e9;
+    background: #D1C4E9;
+    border-color: #D1C4E9;
   }
 
   .form-elements{
-    background: #ead9e9;
+    background: #D1C4E9;
     padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    border-radius: 0 0 3px 3px;
   }
 
   .form-elements > .form-element{
@@ -197,12 +208,24 @@ input, textarea, select {
   }
 
   .form-elements .btn-search{
-    background: #702269;
+    background: #512DA8;
     color: #ffffff;
     margin-top: 15px;
     font-size: 16px;
     padding: 12px;
     font-weight: 500;
+  }
+
+  @media only screen and (min-width : 992px) {
+    .button-tabs .btn.btn-tab:first-child{
+      border-radius: 3px 0 0 0;
+    }
+    .button-tabs .btn.btn-tab:last-child{
+      border-radius: 0 3px 0  0;
+    }
+    .form-elements{
+      border-radius: 0 0 3px 3px;
+    }
   }
 
 /* Refine Search Widget css */
@@ -217,8 +240,11 @@ input, textarea, select {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: #dabad8;
-    color: rgba(0,0,0,0.7);
+    background: #ffffff;
+    color: #512DA8;
+    border: 0 solid #512DA8;
+    border-top-width: 1px;
+    border-bottom-width: 3px;
   }
 
   .travel-summary h2, .travel-summary p, .travel-summary label {
@@ -252,6 +278,10 @@ input, textarea, select {
     .travel-summary {
       flex-direction: row;
       justify-content: space-between;
+      margin-bottom: 30px;
+      border-left-width: 1px;
+      border-right-width: 1px;
+      border-radius: 3px;
     }
     .travel-summary .origin-destination{
       border: none;
@@ -271,10 +301,15 @@ input, textarea, select {
 
   .flights-wrapper > .flight-card {
     margin: 0 15px;
-    border: 1px solid #e1e2e3;
+    border: 1px solid #eaebec;
     padding: 10px;
     display: flex;
     flex-direction: column;
+    border-radius: 3px;
+  }
+
+  .flights-wrapper > .flight-card:nth-child(even) {
+    background: #f6f7f8;
   }
 
   .flights-wrapper > .flight-card + .flight-card{
@@ -324,6 +359,7 @@ input, textarea, select {
     margin: -10px;
     margin-top: 15px;
     background: #f1f2f3;
+    border-top: 1px solid #eaebec;
   }
 
   .flight-card aside > .airline-logo{
@@ -331,12 +367,13 @@ input, textarea, select {
   }
 
   .flight-card aside > .btn-book{
-    padding: 10px 20px;
-    background: #702269;
+    padding: 10px 25px;
+    background: #FF4081;
     color: #ffffff;
     font-weight: 500;
     font-size: 16px;
     letter-spacing: 0.2px;
+    border-radius: 0 0 3px 0;
   }
 
   @media only screen and (min-width : 992px) {
@@ -364,5 +401,6 @@ input, textarea, select {
 
     .flight-card aside > .btn-book{
       margin-top: 10px;
+      border-radius: 3px;
     }
   }
