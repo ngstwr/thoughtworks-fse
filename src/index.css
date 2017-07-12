@@ -397,10 +397,12 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
       flex-direction: column;
       align-content: space-between;
       margin: 0;
+      border: none;
     }
 
     .flight-card aside > .btn-book{
       margin-top: 10px;
       border-radius: 3px;
+      padding: 10px 10px;
     }
   }
