@@ -68,10 +68,43 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
 
 .widget {
   background: none;
+  display: none;
+}
+
+.widget {
+  background: none;
+  display: none;
+}
+
+.widget.show{
+  display: block;
+  margin-bottom: 15px;
 }
 
 .widget + .widget{
   margin-top: 15px;
+}
+
+.page-container .content{
+  display: flex;
+  min-height: 200px;
+}
+
+.content-wrapper{
+  flex-grow: 1;
+}
+
+.empty{
+  flex-grow: 1;
+  background: #f1f2f3;
+  display: flex;
+  align-items: center;
+}
+.empty > h3{
+  margin: auto;
+  font-size: 30px;
+  font-weight: 300;
+  color: #c1c2c4;
 }
 
 @media only screen and (min-width : 992px) {
@@ -92,6 +125,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
   .page-container .content{
     flex-grow: 3;
     margin-left: 15px;
+    display: flex;
   }
 
   .hidden-lg {
@@ -100,6 +134,16 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
 
   .visible-lg {
     display: block;
+  }
+
+  .widget {
+    display: block;
+  }
+
+  .widget > .widget-body{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
   }
 }
 
@@ -160,12 +204,6 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
 
 
 /* travel plan widget css */
-  .travel-plan-widget form{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-
   .button-tabs{
     display: flex;
     justify-content: center;
@@ -189,21 +227,21 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    border-radius: 0 0 3px 3px;
+    border-radius: 0;
   }
 
-  .form-elements > .form-element{
+  .form-element{
     display: flex;
     flex-direction: column;
   }
 
-  .form-elements > .form-element > label{
+  .form-element > label{
     margin-bottom: 5px;
     font-size: 13px;
     opacity: 0.6;
   }
 
-  .form-elements > .form-element + .form-element{
+  .form-element + .form-element{
     margin-top: 15px;
   }
 
@@ -230,9 +268,6 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
 
 /* Refine Search Widget css */
   .refine-search-widget {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
   }
 
 /* Travel Summary css */
@@ -286,8 +321,8 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
     .travel-summary .origin-destination{
       border: none;
     }
-    .travel-summary .depart-return .depart-date{
-      margin-right: 30px;
+    .travel-summary .depart-return .return-date{
+      margin-left: 30px;
     }
   }
 
@@ -351,6 +386,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
   }
   .flight-details label, .flight-details p {
     display: inline-block;
+    margin-right: 5px;
   }
 
   .flight-card aside{
@@ -389,6 +425,9 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-
 
     .flight-card h3{
       font-size: 26px;
+    }
+    .flight-card h3 > .currency{
+      margin-right: 5px;
     }
 
     .flight-card aside{

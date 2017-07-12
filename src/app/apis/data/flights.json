@@ -4,8 +4,14 @@
         "airlineCode": "AI",
         "flightNumber": "202",
         "aircraftType": "Boeing",
-        "origin": "PNQ",
-        "destination": "DEL",
+        "origin": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
+        "destination": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
         "departureTime": "10:00",
         "arrivalTime": "12:00",
         "stops": null,
@@ -14,7 +20,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "15 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 5000
             }
         ]
@@ -24,8 +29,14 @@
         "airlineCode": "AI",
         "flightNumber": "201",
         "aircraftType": "Airbus",
-        "origin": "PNQ",
-        "destination": "DEL",
+        "origin": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
+        "destination": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
         "departureTime": "10:40",
         "arrivalTime": "14:00",
         "stops": null,
@@ -34,7 +45,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "25 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 7000
             }
         ]
@@ -44,8 +54,14 @@
         "airlineCode": "AI",
         "flightNumber": "203",
         "aircraftType": "Boeing",
-        "origin": "PNQ",
-        "destination": "DEL",
+        "origin": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
+        "destination": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
         "departureTime": "15:00",
         "arrivalTime": "17:20",
         "stops": null,
@@ -54,7 +70,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "15 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 5600
             }
         ]
@@ -64,8 +79,14 @@
         "airlineCode": "AI",
         "flightNumber": "202",
         "aircraftType": "Boeing",
-        "origin": "DEL",
-        "destination": "PNQ",
+        "origin": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
+        "destination": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
         "departureTime": "10:00",
         "arrivalTime": "12:00",
         "stops": null,
@@ -74,7 +95,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "15 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 4500
             }
         ]
@@ -84,8 +104,14 @@
         "airlineCode": "AI",
         "flightNumber": "201",
         "aircraftType": "Airbus",
-        "origin": "DEL",
-        "destination": "PNQ",
+        "origin": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
+        "destination": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
         "departureTime": "10:40",
         "arrivalTime": "14:00",
         "stops": null,
@@ -94,7 +120,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "25 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 7500
             }
         ]
@@ -104,8 +129,14 @@
         "airlineCode": "AI",
         "flightNumber": "203",
         "aircraftType": "Boeing",
-        "origin": "DEL",
-        "destination": "PNQ",
+        "origin": {
+            "code": "DEL",
+            "name": "Delhi"
+        },
+        "destination": {
+            "code": "PNQ",
+            "name": "Pune"
+        },
         "departureTime": "15:00",
         "arrivalTime": "17:20",
         "stops": null,
@@ -114,7 +145,6 @@
                 "classCode": "ECO",
                 "classDesc": "Economy Class",
                 "baggageAllowed": "15 kg",
-                "fareCurrency": "Rs.",
                 "basicAmount": 5200
             }
         ]
