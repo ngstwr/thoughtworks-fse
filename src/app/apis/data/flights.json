@@ -1,0 +1,122 @@
+[
+    {
+        "flightId": "232123",
+        "airlineCode": "AI",
+        "flightNumber": "202",
+        "aircraftType": "Boeing",
+        "origin": "PNQ",
+        "destination": "DEL",
+        "departureTime": "10:00",
+        "arrivalTime": "12:00",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "15 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 5000
+            }
+        ]
+    },
+    {
+        "flightId": "232124",
+        "airlineCode": "AI",
+        "flightNumber": "201",
+        "aircraftType": "Airbus",
+        "origin": "PNQ",
+        "destination": "DEL",
+        "departureTime": "10:40",
+        "arrivalTime": "14:00",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "25 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 7000
+            }
+        ]
+    },
+    {
+        "flightId": "232123",
+        "airlineCode": "AI",
+        "flightNumber": "203",
+        "aircraftType": "Boeing",
+        "origin": "PNQ",
+        "destination": "DEL",
+        "departureTime": "15:00",
+        "arrivalTime": "17:20",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "15 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 5600
+            }
+        ]
+    },
+    {
+        "flightId": "232125",
+        "airlineCode": "AI",
+        "flightNumber": "202",
+        "aircraftType": "Boeing",
+        "origin": "DEL",
+        "destination": "PNQ",
+        "departureTime": "10:00",
+        "arrivalTime": "12:00",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "15 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 4500
+            }
+        ]
+    },
+    {
+        "flightId": "232126",
+        "airlineCode": "AI",
+        "flightNumber": "201",
+        "aircraftType": "Airbus",
+        "origin": "DEL",
+        "destination": "PNQ",
+        "departureTime": "10:40",
+        "arrivalTime": "14:00",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "25 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 7500
+            }
+        ]
+    },
+    {
+        "flightId": "232128",
+        "airlineCode": "AI",
+        "flightNumber": "203",
+        "aircraftType": "Boeing",
+        "origin": "DEL",
+        "destination": "PNQ",
+        "departureTime": "15:00",
+        "arrivalTime": "17:20",
+        "stops": null,
+        "fares": [
+            {
+                "classCode": "ECO",
+                "classDesc": "Economy Class",
+                "baggageAllowed": "15 kg",
+                "fareCurrency": "Rs.",
+                "basicAmount": 5200
+            }
+        ]
+    }
+]
