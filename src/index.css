@@ -350,6 +350,10 @@ input, textarea, select {
       flex-grow: 4;
     }
 
+    .flight-card h3{
+      font-size: 26px;
+    }
+
     .flight-card aside{
       background: none;
       flex-grow: 1;
