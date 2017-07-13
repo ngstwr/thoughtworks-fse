@@ -12,7 +12,7 @@ function handleError(error) {
   return null;
 }
 
-function fetchAirports(searchStr) {
+function fetchAirports(searchStr = "") {
   return new Promise(
     function (resolve, reject) {
         try {
