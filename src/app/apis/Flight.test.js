@@ -58,4 +58,58 @@ describe('API Flight', () => {
 
   });
 
+  describe('getPriceRange Function', () => {
+    const flightsArr = [
+            { totalAmount: 1000 },
+            { totalAmount: 2000 },
+            { totalAmount: 3000 },
+            { totalAmount: 4000 }
+          ],
+          expectedCorrectObj = {
+            minPrice: 1000,
+            maxPrice: 4000
+          },
+          expectedDefaultObj = {
+            minPrice: 0,
+            maxPrice: 50000
+          };
+
+    it('should return the default price range object if flight array is empty or contain less then two flights', () => {
+      expect(Flight.getPriceRange()).toEqual(expectedDefaultObj);
+    });
+
+
+    it('should return the price range object according to passed flights array', () => {
+      expect(Flight.getPriceRange(flightsArr)).toEqual(expectedCorrectObj);
+    });
+  });
+
+  describe('filterFlightsByPrice Function', () => {
+    const flightsArr = [
+            { flightId: "A", totalAmount: 1000 },
+            { flightId: "B", totalAmount: 2000 },
+            { flightId: "C", totalAmount: 3000 },
+            { flightId: "D", totalAmount: 4000 }
+          ],
+          refineRangeSuccess = {
+            min: 2500,
+            max: 3500
+          },
+          refineRangeFailure = {
+            min: 4500,
+            max: 6500
+          },
+          expectedFlightsArr = [{ flightId: "C", totalAmount: 3000 }];
+
+    it('should return an empty array if flight array is empty or price range does not match with any flights', () => {
+      expect(Flight.filterFlightsByPrice([], refineRangeSuccess)).toEqual([]);
+
+      expect(Flight.filterFlightsByPrice(flightsArr, refineRangeFailure)).toEqual([]);
+    });
+
+    it('should return the array of flights according to the passed price range', () => {
+      expect(Flight.filterFlightsByPrice(flightsArr, refineRangeSuccess)).toEqual(expect.arrayContaining(expectedFlightsArr));
+    });
+  });
+
 });

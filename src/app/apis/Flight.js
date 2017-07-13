@@ -1,6 +1,6 @@
 import FlightsJSON from './data/flights.json';
 
-function getFlightsBetween(flightsArr, fromAirportCode, toAirportCode){
+function getFlightsBetween(flightsArr = [], fromAirportCode, toAirportCode){
   return flightsArr.filter((flight) => {
     return flight.origin.code === fromAirportCode && flight.destination.code === toAirportCode;
   });
@@ -68,7 +68,7 @@ function fetchFlights(travelPlan) {
   );
 }
 
-function getPriceRange(flightsArr) {
+function getPriceRange(flightsArr = []) {
   let priceRange = {
     minPrice: 0,
     maxPrice: 50000
@@ -80,7 +80,7 @@ function getPriceRange(flightsArr) {
   return priceRange;
 }
 
-function filterFlightsByPrice(flightsArr, refineRange){
+function filterFlightsByPrice(flightsArr = [], refineRange){
   return flightsArr.filter((flight) => {
     return flight.totalAmount >= refineRange.min && flight.totalAmount <= refineRange.max;
   });
