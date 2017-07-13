@@ -1,0 +1,74 @@
+
+
+/* Select component css  */
+  .Select-control {
+    font-size: 13px;
+    border-radius: 3px;
+    background: rgba(81, 45, 168, 0.45);
+    border: 0px solid rgba(81, 45, 168, 0.35);
+    color: #ffffff;
+  }
+  .is-open > .Select-control {
+    background: rgba(81, 45, 168, 0.45);
+    border: 0px solid rgba(81, 45, 168, 0.35);
+    color: #ffffff;
+  }
+
+  .Select-placeholder, .Select--single > .Select-control .Select-value {
+    color: white;
+  }
+
+  .Select-arrow {
+    border-color: #fff transparent transparent;
+  }
+
+  .Select-input > input{
+    color: #ffffff;
+  }
+
+  .has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select-clear-zone{
+    color: white
+  }
+
+  .Select-clear-zone{
+    display: none;
+  }
+
+  .Select.has-value .Select-clear-zone{
+    display: table-cell;
+  }
+
+
+  /* InputRange css */
+
+  .form-element .input-range-container{
+    padding: 0 15px 0 10px;
+    margin: 25px 0;
+  }
+
+  .input-range-container .input-range__slider {
+    background: #512da8;
+    border: 1px solid #512da8;
+  }
+
+  .input-range-container .input-range__track.input-range__track--active {
+    background: #673AB7;
+  }
+
+  .input-range-container .input-range__track {
+    background: #ffffff;
+  }
+
+  .input-range-container .input-range__label {
+    color: #000;
+  }
+
+  .input-range-container .input-range__label--min, .input-range__label--max {
+    opacity: 0.5;
+    font-weight: 500;
+  }
+
+  .input-range-container .input-range__label--value {
+    color: #512da8;
+    font-weight: 500;
+  }

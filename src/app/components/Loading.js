@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-let LOADING_IMG_URL = './images/loader.gif';
+import LoaderImg from './loader.svg';
 
 const styles = {
   content: {
@@ -74,7 +74,7 @@ LoadingImage.propTypes = {
 };
 
 LoadingImage.defaultProps = {
-  imgUrl: LOADING_IMG_URL
+  imgUrl: LoaderImg
 };
 
 function Loading(props) {
@@ -90,13 +90,13 @@ function Loading(props) {
 Loading.propTypes = {
   text: PropTypes.string.isRequired,
   speed: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.oneOf(['text', 'image'])
 };
 
 Loading.defaultProps = {
   text: 'Loading',
   speed: 300,
-  type: 'text'
+  type: 'image'
 };
 
 export default Loading;

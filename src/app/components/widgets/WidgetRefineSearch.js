@@ -1,45 +1,55 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import InputRange from 'react-input-range';
+
+import 'react-input-range/lib/css/index.css';
 import './Widget.css';
 
 class WidgetRefineSearch extends Component {
   constructor(props) {
-    super();
-
+    super(props);
     this.state = {
-      minPrice: 0,
-      maxPrice: 10000
+      minPrice: props.refinePriceRange.minPrice,
+      maxPrice: props.refinePriceRange.maxPrice,
+      selectedPriceRange: {
+        min: props.refinePriceRange.minPrice,
+        max: props.refinePriceRange.maxPrice
+      }
     }
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(field, event) {
-    let object = {};
-    object[field] = event.target.value;
-    this.setState(object);
-    this.props.handleRefine(this.state);
+  componentWillReceiveProps(nextProps) {
+    if(!Object.is(this.props.refinePriceRange, nextProps.refinePriceRange)) {
+      this.setState({
+        minPrice: nextProps.refinePriceRange.minPrice,
+        maxPrice: nextProps.refinePriceRange.maxPrice,
+        selectedPriceRange: {
+          min: nextProps.refinePriceRange.minPrice,
+          max: nextProps.refinePriceRange.maxPrice
+        }
+      });
+    }
   }
 
   render() {
     return (
       <div className={"widget refine-search-widget" + (this.props.isActive ? " show" : "")}>
         <div className="widget-body">
-          <h3>Refine Flight Search</h3>
-          <div className="form-element">
-            <label>Minimum Price</label>
-            <input type="number" value={this.state.minPrice}
-                    min="0" max={this.state.maxPrice}
-                    placeholder="Enter Minimum Price"
-                    onChange={this.handleChange.bind(this, 'minPrice')} />
-          </div>
-          <div className="form-element">
-            <label>Maximum Price</label>
-            <input type="number" value={this.state.maxPrice}
-                    min={this.state.minPrice} max="10000"
-                    placeholder="Enter Maximum Price"
-                    onChange={this.handleChange.bind(this, 'maxPrice')} />
+          <h3 className="widget-title">Refine Flight Search</h3>
+          <div className="form-elements">
+            <div className="form-element">
+              <label>Select Price Range (INR)</label>
+              <div className="input-range-container">
+                <InputRange
+                    minValue={this.state.minPrice}
+                    maxValue={this.state.maxPrice}
+                    step={100}
+                    value={this.state.selectedPriceRange}
+                    onChange={value => this.setState({ selectedPriceRange: value })}
+                    onChangeComplete={this.props.handleRefine.bind(this)} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,11 +59,17 @@ class WidgetRefineSearch extends Component {
 
 WidgetRefineSearch.propTypes = {
   isActive: PropTypes.bool.isRequired,
-  handleRefine: PropTypes.func.isRequired
+  refinePriceRange: PropTypes.object.isRequired,
+  handleRefine: PropTypes.func.isRequired,
+  toggleForm: PropTypes.func.isRequired
 }
 
 WidgetRefineSearch.defaultProps = {
-  isActive: false
+  isActive: false,
+  refinePriceRange: {
+    minPrice: 0,
+    maxPrice: 50000
+  }
 }
 
 export default WidgetRefineSearch;

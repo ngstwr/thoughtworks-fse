@@ -8,6 +8,8 @@ import WidgetRefineSearch from './components/widgets/WidgetRefineSearch';
 import TravelSummary from './components/TravelSummary';
 import Flights from './components/flights/Flights';
 
+import FlightAPI from './apis/Flight';
+
 import './App.css';
 
 class App extends Component {
@@ -17,78 +19,31 @@ class App extends Component {
     this.state = {
       travelPlan: {
         bookingType: "return",
-        origin: {
-          code: "PNQ",
-          name: "Pune"
-        },
-        destination: {
-          code: "DEL",
-          name: "Delhi"
-        },
-        departureDate: "11-03-2017",
-        returnDate: "13-03-2017",
-        passengersCount: 1,
-        minPrice: 0,
-        maxPrice: 10000
+        origin: '',
+        destination: '',
+        departureDate: '',
+        returnDate: '',
+        passengersCount: 1
       },
       mobileActiveForm: "PlanForm",
-      resultFlights: [
-        {
-          "planId": "232123-232124",
-          "toFlight": {
-            "flightId": "232123",
-            "airlineCode": "AI",
-            "flightNumber": "202",
-            "aircraftType": "Boeing",
-            "origin": {
-              "code": "PNQ",
-              "name": "Pune"
-            },
-            "destination": {
-              "code": "DEL",
-              "name": "Delhi"
-            },
-            "departureTime": "10:00",
-            "arrivalTime": "12:00",
-            "stops": null,
-            "fare": {
-              "classCode": "ECO",
-              "classDesc": "Economy Class",
-              "baggageAllowed": "15 kg",
-              "basicAmount": 5000
-            }
-          },
-          "returnFlight": {
-            "flightId": "232124",
-            "airlineCode": "AI",
-            "flightNumber": "202",
-            "aircraftType": "Boeing",
-            "origin": {
-              "code": "DEL",
-              "name": "Delhi"
-            },
-            "destination": {
-              "code": "PNQ",
-              "name": "Pune"
-            },
-            "departureTime": "10:50",
-            "arrivalTime": "13:00",
-            "stops": null,
-            "fare": {
-              "classCode": "ECO",
-              "classDesc": "Economy Class",
-              "baggageAllowed": "15 kg",
-              "basicAmount": 4500
-            }
-          }
-        }
-      ],
+      resultFlights: null,
+      unfilteredFlights: null,
+      refinePriceRange: {
+        minPrice: 0,
+        maxPrice: 50000
+      },
       loading: false
     }
 
+    this.toggleLoading = this.toggleLoading.bind(this);
     this.toggleActiveForm = this.toggleActiveForm.bind(this);
     this.searchFlights = this.searchFlights.bind(this);
+    this.refineFlights = this.refineFlights.bind(this);
     this.updateTravelPlan = this.updateTravelPlan.bind(this);
+  }
+
+  toggleLoading(value){
+    this.setState({loading: value});
   }
 
   toggleActiveForm(formName){
@@ -100,37 +55,46 @@ class App extends Component {
   }
 
   searchFlights(travelPlan){
-    this.setState(() => {
-      return {
-        resultFlights: []
-      }
+    FlightAPI.fetchFlights(travelPlan)
+      .then((response) => {
+        const newPriceRange = FlightAPI.getPriceRange(response);
+        this.setState({
+            refinePriceRange: newPriceRange,
+            resultFlights: response,
+            unfilteredFlights: response
+        });
+        this.toggleLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.toggleLoading(false);
+      });
+
+  }
+
+  refineFlights(refineRange){
+    this.toggleLoading(true);
+    let filteredFlights = FlightAPI.filterFlightsByPrice(this.state.unfilteredFlights, refineRange)
+    this.setState({
+      resultFlights: filteredFlights
     });
+    this.toggleLoading(false);
   }
 
   updateTravelPlan(travelPlan){
-    console.log(travelPlan);
+    this.toggleLoading(true);
     this.setState((prevState) => {
       return {
         travelPlan: Object.assign({}, prevState.travelPlan, travelPlan)
       }
     })
 
-    this.searchFlights(this.state.travelPlan);
+    this.searchFlights(travelPlan);
   }
 
   render() {
-    const { travelPlan, mobileActiveForm, resultFlights, loading } = this.state;
+    const { travelPlan, mobileActiveForm, resultFlights, refinePriceRange, loading } = this.state;
 
-      // travelPlan: {
-      //   bookingType: "return",
-      //   origin: "PNQ",
-      //   destination: "DEL",
-      //   departureDate: "11-03-2017",
-      //   returnDate: "13-03-2017",
-      //   passengersCount: 1,
-      //   minPrice: 0,
-      //   maxPrice: 10000
-      // },
     return (
       <div className="App">
 
@@ -140,11 +104,17 @@ class App extends Component {
           <div className="sidebar">
             <WidgetTravelPlan
                 isActive={mobileActiveForm==="PlanForm"}
-                handleSearch={this.updateTravelPlan} />
+                handleSearch={this.updateTravelPlan}
+                toggleForm={this.toggleActiveForm} />
 
-            <WidgetRefineSearch
-                isActive={mobileActiveForm==="RefineForm"}
-                handleRefine={this.updateTravelPlan} />
+            {
+              resultFlights &&
+                <WidgetRefineSearch
+                    isActive={mobileActiveForm==="RefineForm"}
+                    refinePriceRange={refinePriceRange}
+                    handleRefine={this.refineFlights}
+                    toggleForm={this.toggleActiveForm} />
+            }
           </div>
 
           <div className="content">

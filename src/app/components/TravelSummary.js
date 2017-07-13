@@ -1,33 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Moment from 'react-moment';
+
 const TravelSummary = props => {
   const isReturnTrip = props.travelPlan.bookingType === 'return';
 
   return (
     <div className="travel-summary">
       <h2 className="origin-destination">
-        {props.travelPlan.origin.name}
+        {props.travelPlan.origin.city}
         <span className="separator"> &gt; </span>
-        {props.travelPlan.destination.name}
+        {props.travelPlan.destination.city}
         {
           isReturnTrip &&
             <span>
               <span className="separator"> &gt; </span>
-              {props.travelPlan.origin.name}
+              {props.travelPlan.origin.city}
             </span>
         }
       </h2>
       <div className="depart-return">
         <div className="depart-date">
           <label>Depart: </label>
-          <p>{props.travelPlan.departureDate}</p>
+          <Moment as="p" format="Do MMM YYYY">{props.travelPlan.departureDate}</Moment>
         </div>
         {
           isReturnTrip &&
             <div className="return-date">
               <label>Return: </label>
-              <p>{props.travelPlan.returnDate}</p>
+              <Moment as="p" format="Do MMM YYYY">{props.travelPlan.returnDate}</Moment>
             </div>
         }
       </div>

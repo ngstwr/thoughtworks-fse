@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Moment from 'react-moment';
+import UtilsCommon from '../../utils/Common';
+
 import './Flights.css';
 
 const FlightDetails = props => {
@@ -14,11 +17,11 @@ const FlightDetails = props => {
       <p className="origin-destination">{flight.origin.code} > {flight.destination.code}</p>
       <div className="depart-time">
         <label>Depart: </label>
-        <p>{flight.departureTime}</p>
+        <Moment as="p" parse="HH:mm" format="h:mm A">{flight.departureTime}</Moment>
       </div>
       <div className="arrive-time">
         <label>Arrive: </label>
-        <p>{flight.arrivalTime}</p>
+        <Moment as="p" parse="HH:mm" format="h:mm A">{flight.arrivalTime}</Moment>
       </div>
     </div>
   )
@@ -30,14 +33,13 @@ FlightDetails.propTypes = {
 
 const FlightPlan = props => {
   const toFlight = props.plan.toFlight,
-        returnFlight = props.plan.returnFlight || null;
-  const totalAmount = toFlight.fare.basicAmount + returnFlight.fare.basicAmount;
+        returnFlight = props.plan.returnFlight || null,
+        totalAmount = UtilsCommon.formatCurrency(props.plan.totalAmount);
 
   return (
     <div className="flight-card">
       <div className="details">
         <h3>
-          <span className="currency">Rs.</span>
           <span className="fare-amount">{totalAmount}</span>
         </h3>
 
