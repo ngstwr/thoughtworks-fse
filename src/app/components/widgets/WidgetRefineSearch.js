@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import InputRange from 'react-input-range';
+import UtilsCommon from '../../utils/Common';
 
 import 'react-input-range/lib/css/index.css';
 import './Widget.css';
@@ -17,6 +18,12 @@ class WidgetRefineSearch extends Component {
         max: props.refinePriceRange.maxPrice
       }
     }
+  }
+
+  formatRangeLabel(value){
+    return UtilsCommon.formatCurrency(value, {
+      minimumFractionDigits: 0
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,10 +53,13 @@ class WidgetRefineSearch extends Component {
                     maxValue={this.state.maxPrice}
                     step={100}
                     value={this.state.selectedPriceRange}
+                    formatLabel={this.formatRangeLabel.bind(this)}
                     onChange={value => this.setState({ selectedPriceRange: value })}
                     onChangeComplete={this.props.handleRefine.bind(this)} />
               </div>
             </div>
+
+            <button type="button" className="btn btn-hide-me" onClick={this.props.toggleForm.bind(this, 'RefineForm')}>Hide this</button>
           </div>
         </div>
       </div>

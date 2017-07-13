@@ -24,6 +24,12 @@
 
   .Select-input > input{
     color: #ffffff;
+    background: transparent;
+    border: none;
+  }
+  .Select-input > input:focus{
+    background: transparent;
+    border: none;
   }
 
   .has-value.Select--single > .Select-control .Select-value .Select-value-label, .Select-clear-zone{

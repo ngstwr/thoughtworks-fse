@@ -16,11 +16,14 @@ const Header = props => {
                     onClick={props.handleToggle.bind(this, "PlanForm")}>
                       Modify
                     </button>
-            <button type="button"
-                    className={"btn btn-toggle" + (props.activeForm==="RefineForm"? " active":"")}
-                    onClick={props.handleToggle.bind(this, "RefineForm")}>
-                      Refine
-                    </button>
+            {
+              !props.hideRefine &&
+                <button type="button"
+                        className={"btn btn-toggle" + (props.activeForm==="RefineForm"? " active":"")}
+                        onClick={props.handleToggle.bind(this, "RefineForm")}>
+                          Refine
+                        </button>
+            }
           </div>
         </div>
       </div>
@@ -30,11 +33,13 @@ const Header = props => {
 
 Header.propTypes = {
   activeForm: PropTypes.string.isRequired,
+  hideRefine: PropTypes.bool.isRequired,
   handleToggle: PropTypes.func.isRequired
 }
 
 Header.defaultProps = {
-  activeForm: "none"
+  activeForm: "none",
+  hideRefine: true
 }
 
 export default Header;

@@ -98,7 +98,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Header activeForm={mobileActiveForm} handleToggle={this.toggleActiveForm} />
+        <Header activeForm={mobileActiveForm} handleToggle={this.toggleActiveForm} hideRefine={!resultFlights} />
 
         <div className="page-container container">
           <div className="sidebar">
