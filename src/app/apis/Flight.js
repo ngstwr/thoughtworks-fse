@@ -14,11 +14,15 @@ function handleError(error) {
 function fetchFlights(travelPlan) {
   return new Promise(
     function (resolve, reject) {
-      const originCode = travelPlan.origin.code,
-            destinationCode = travelPlan.destination.code;
-      let toFlightsArr, returnFlightsArr, flightPlansArr;
-
       try {
+        if(!travelPlan || !travelPlan.hasOwnProperty("origin") || !travelPlan.hasOwnProperty("origin")){
+          reject(new Error("Invalid travel plan"));
+        }
+
+        const originCode = travelPlan.origin.code,
+              destinationCode = travelPlan.destination.code;
+        let toFlightsArr, returnFlightsArr, flightPlansArr;
+
         toFlightsArr = getFlightsBetween(FlightsJSON, originCode, destinationCode);
 
         if(travelPlan.bookingType === 'return'){
