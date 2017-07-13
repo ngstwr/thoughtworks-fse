@@ -10,6 +10,13 @@ describe('API Airport', () => {
       });
     });
 
+    it('should return an empty array if no airport is matched with search string', () => {
+      expect.assertions(1);
+      return Airport.fetchAirports("RPR").then(data => {
+        expect(data).toEqual([]);
+      });
+    });
+
     it('should return an array of objects according to search string is passed', () => {
       const expected = [{
                 "airportId": "1",
