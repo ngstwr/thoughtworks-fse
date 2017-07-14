@@ -1,12 +1,12 @@
-let localStorage = {};
+let localStore = {};
 
-export default {
+const localStorageMock = {
     setItem(key, value) {
       return new Promise(
         function (resolve, reject) {
           try {
-            Object.assign(localStorage, {[key]: value});
-            resolve(localStorage[key]);
+            Object.assign(localStore, {[key]: value});
+            resolve(localStore[key]);
           } catch (error) {
             reject(error);
           }
@@ -17,7 +17,7 @@ export default {
       return new Promise(
         function (resolve, reject) {
           try {
-            resolve(localStorage[key]);
+            resolve(localStore[key]);
           } catch (error) {
             reject(error);
           }
@@ -28,7 +28,7 @@ export default {
       return new Promise(
         function (resolve, reject) {
           try {
-            delete localStorage[key];
+            delete localStore[key];
             resolve(true);
           } catch (error) {
             reject(error);
@@ -40,7 +40,7 @@ export default {
       return new Promise(
         function (resolve, reject) {
           try {
-            localStorage = {};
+            localStore = {};
             resolve(true);
           } catch (error) {
             reject(error);
@@ -49,3 +49,5 @@ export default {
       );
     }
 };
+
+global.localStorage = localStorageMock;

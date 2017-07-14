@@ -43,4 +43,5 @@ class WebStore {
   }
 }
 
+// exporting a single instance
 export let Store = new WebStore();
