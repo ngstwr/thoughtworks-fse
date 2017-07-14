@@ -287,7 +287,7 @@ class WidgetTravelPlan extends Component {
             <button type="submit" className="btn btn-search">Search Flights</button>
             {
               // Disabled due to an issue related to a bug in Select component
-              lastSearched &&
+              false && lastSearched &&
               <div className="last-searched" onClick={this.useLastSearched.bind(this)}>
                 <label>Use Last Searched:</label>
                 <p>
