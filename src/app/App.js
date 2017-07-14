@@ -5,7 +5,7 @@ import Loading from './components/Loading';
 import Header from './components/header/Header';
 import WidgetTravelPlan from './components/widgets/WidgetTravelPlan';
 import WidgetRefineSearch from './components/widgets/WidgetRefineSearch';
-import TravelSummary from './components/TravelSummary';
+import TravelSummary from './components/travel-summary/TravelSummary';
 import Flights from './components/flights/Flights';
 
 import FlightAPI from './apis/Flight';

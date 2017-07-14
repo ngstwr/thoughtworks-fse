@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Moment from 'react-moment';
 
+import './TravelSummary.css';
+
 const TravelSummary = props => {
   const isReturnTrip = props.travelPlan.bookingType === 'return';
 
