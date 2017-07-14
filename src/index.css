@@ -18,8 +18,11 @@ ul > li {
 }
 
 a {
+  display: inline-block;
   text-decoration: none;
   color: #232426;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 
 button {
@@ -36,6 +39,7 @@ button {
 
 button:hover, button:focus{
   opacity: 0.75;
+  transform: translateY(1px);
 }
 
 input, textarea, select {

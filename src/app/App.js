@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Loading from './components/Loading';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import WidgetTravelPlan from './components/widgets/WidgetTravelPlan';
 import WidgetRefineSearch from './components/widgets/WidgetRefineSearch';
 import TravelSummary from './components/travel-summary/TravelSummary';
@@ -139,6 +140,8 @@ class App extends Component {
             }
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }
