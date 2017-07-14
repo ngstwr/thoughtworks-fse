@@ -75,10 +75,12 @@ class App extends Component {
   refineFlights(refineRange){
     this.toggleLoading(true);
     let filteredFlights = FlightAPI.filterFlightsByPrice(this.state.unfilteredFlights, refineRange)
-    this.setState({
-      resultFlights: filteredFlights
-    });
-    this.toggleLoading(false);
+    window.setTimeout(() => {
+      this.setState({
+        resultFlights: filteredFlights
+      });
+      this.toggleLoading(false);
+    }, 1000);
   }
 
   updateTravelPlan(travelPlan){
