@@ -25,7 +25,7 @@ a {
   transition: all 0.2s ease-in-out;
 }
 
-button {
+button, button:focus {
   border: none;
   padding: 8px 12px;
   font-size: 14px;
@@ -37,9 +37,13 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
-button:hover, button:focus{
+button:hover{
   opacity: 0.75;
+}
+button:active{
+  opacity: 1;
   transform: translateY(1px);
+  box-shadow: inset 0 1px 8px 0 rgba(0,0,0,0.4);
 }
 
 input, textarea, select {
