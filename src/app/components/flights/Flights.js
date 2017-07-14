@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Moment from 'react-moment';
-import UtilsCommon from '../../utils/Common';
+import Common from '../../utils/Common';
 
 import './Flights.css';
 
@@ -34,7 +34,7 @@ FlightDetails.propTypes = {
 const FlightPlan = props => {
   const toFlight = props.plan.toFlight,
         returnFlight = props.plan.returnFlight || null,
-        totalAmount = UtilsCommon.formatCurrency(props.plan.totalAmount);
+        totalAmount = Common.formatCurrency(props.plan.totalAmount);
 
   return (
     <div className="flight-card">
