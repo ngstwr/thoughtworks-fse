@@ -1,5 +1,7 @@
 import AirportJSON from './data/airports.json';
 
+// Function to get array of airports filtered by search term
+// matches with any of code, city or name property of an airport
 function getAirportsByString(AirportsArr, searchStr){
   return AirportsArr.filter((airport) => {
       const searchStrLowerCase = searchStr.toLowerCase();
@@ -7,11 +9,13 @@ function getAirportsByString(AirportsArr, searchStr){
   });
 }
 
+// Error handling callback function
 function handleError(error) {
   console.warn(error);
   return null;
 }
 
+// Function to fetch an array of airports
 function fetchAirports(searchStr = "") {
   return new Promise(
     function (resolve, reject) {

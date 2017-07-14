@@ -1,16 +1,19 @@
 import FlightsJSON from './data/flights.json';
 
+// Function to get array of flights between from and to airport code
 function getFlightsBetween(flightsArr = [], fromAirportCode, toAirportCode){
   return flightsArr.filter((flight) => {
     return flight.origin.code === fromAirportCode && flight.destination.code === toAirportCode;
   });
 }
 
+// Error handling callback function
 function handleError(error) {
   console.warn(error);
   return null;
 }
 
+// Function to fetch array of flight plans according to passed travel plan
 function fetchFlights(travelPlan) {
   return new Promise(
     function (resolve, reject) {
@@ -28,6 +31,7 @@ function fetchFlights(travelPlan) {
         if(travelPlan.bookingType === 'return'){
           returnFlightsArr = getFlightsBetween(FlightsJSON, destinationCode, originCode);
 
+          // Creating array of flight plans using 'to' and 'return' flights array
           flightPlansArr = toFlightsArr.map((toFlight) => {
             return returnFlightsArr.map((returnFlight) => {
               return {
@@ -39,10 +43,12 @@ function fetchFlights(travelPlan) {
             });
           });
 
+          // Flattening the nested array from above code
           flightPlansArr = flightPlansArr.reduce(function(a, b) {
             return a.concat(b);
           }, []);
         }else{
+          // Creating array of flight plans using 'to' flights array
           flightPlansArr = toFlightsArr.map((toFlight) => {
             return {
               planId: toFlight.flightId + '-',
@@ -68,6 +74,7 @@ function fetchFlights(travelPlan) {
   );
 }
 
+// Function to get min and max price from passed array of flights
 function getPriceRange(flightsArr = []) {
   let priceRange = {
     minPrice: 0,
@@ -80,6 +87,7 @@ function getPriceRange(flightsArr = []) {
   return priceRange;
 }
 
+// Function to get array of flights filtered by passed min and max price range
 function filterFlightsByPrice(flightsArr = [], refineRange){
   return flightsArr.filter((flight) => {
     return flight.totalAmount >= refineRange.min && flight.totalAmount <= refineRange.max;
