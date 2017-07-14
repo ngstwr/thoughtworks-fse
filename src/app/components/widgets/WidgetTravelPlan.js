@@ -3,10 +3,58 @@ import PropTypes from 'prop-types';
 
 import Select from 'react-select';
 import moment from 'moment';
+import { Store } from "../../utils/WebStore";
 import AirportAPI from '../../apis/Airport';
 
 import 'react-select/dist/react-select.css';
 import './Widget.css';
+
+const storeSearch = (search) => {
+  return Store.set('lastSearched', search);
+}
+
+const fetchSearch = () => {
+  return Store.get('lastSearched');
+}
+
+const validateForm = (planObj) => {
+  let errorsObj = {};
+  const today = moment();
+
+  if(!planObj.origin){
+    errorsObj.origin = 'Select your departure city'
+  }
+
+  if(!planObj.destination){
+    errorsObj.destination = 'Select your destination city'
+  }
+
+  if(!planObj.departureDate){
+    errorsObj.departureDate = 'Select your departure date'
+  }else if(moment(planObj.departureDate).isBefore(today, 'day')){
+    errorsObj.departureDate = "Departure date can't be less than today's date"
+  }
+
+  if(planObj.bookingType === 'return'){
+    if(!planObj.returnDate){
+      errorsObj.returnDate = 'Select your return date'
+    }else if((moment(planObj.returnDate).isBefore(today, 'day'))){
+      errorsObj.returnDate = "Return date can't be less than today's date"
+    }else if(moment(planObj.returnDate).isBefore(moment(planObj.departureDate), 'day')){
+      errorsObj.returnDate = 'Return date should be greater than departure date'
+    }
+  }
+
+  if(!planObj.passengersCount || planObj.passengersCount < 1){
+    errorsObj.passengersCount = 'Enter number of passengers'
+  }
+
+
+  return {
+    status: Object.keys(errorsObj).length === 0 && errorsObj.constructor === Object,
+    errors: errorsObj
+  }
+}
 
 class WidgetTravelPlan extends Component {
   constructor(props) {
@@ -19,7 +67,8 @@ class WidgetTravelPlan extends Component {
         departureDate: '',
         returnDate: '',
         passengersCount: 1,
-        searchErrors: {}
+        searchErrors: {},
+        lastSearched: null
     }
 
     this.toggleBookingType = this.toggleBookingType.bind(this);
@@ -29,7 +78,8 @@ class WidgetTravelPlan extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getOptions = this.getOptions.bind(this);
     this.renderSelectedValue = this.renderSelectedValue.bind(this);
-    this.validateForm = this.validateForm.bind(this);
+    this.updateLastSearched = this.updateLastSearched.bind(this);
+    this.useLastSearched = this.useLastSearched.bind(this);
   }
 
   toggleBookingType(type, event) {
@@ -81,11 +131,18 @@ class WidgetTravelPlan extends Component {
       destination: this.state.destination,
       departureDate: this.state.departureDate,
       returnDate: this.state.returnDate,
-      passengersCount: this.state.passengersCount,
+      passengersCount: this.state.passengersCount
     };
-    if(this.validateForm(updatedPlan)){
+    const validationTestResult = validateForm(updatedPlan);
+    this.setState({ searchErrors: validationTestResult.errors });
+
+    if(validationTestResult.status){
       this.props.toggleForm('PlanForm');
       this.props.handleSearch(updatedPlan);
+      storeSearch(updatedPlan).then(() => {
+        this.updateLastSearched();
+      });
+
     }else{
       this.setState((prevState) => {
         let searchErrorsUpdated = prevState.searchErrors;
@@ -95,45 +152,6 @@ class WidgetTravelPlan extends Component {
         };
       });
     }
-  }
-
-  validateForm(planObj){
-    let errorsObj = {};
-    const today = moment();
-
-    if(!planObj.origin){
-      errorsObj.origin = 'Select your departure city'
-    }
-
-    if(!planObj.destination){
-      errorsObj.destination = 'Select your destination city'
-    }
-
-    if(!planObj.departureDate){
-      errorsObj.departureDate = 'Select your departure date'
-    }else if(moment(planObj.departureDate).isBefore(today, 'day')){
-      errorsObj.departureDate = "Departure date can't be less than today's date"
-    }
-
-    if(planObj.bookingType === 'return'){
-      if(!planObj.returnDate){
-        errorsObj.returnDate = 'Select your return date'
-      }else if((moment(planObj.returnDate).isBefore(today, 'day'))){
-        errorsObj.returnDate = "Return date can't be less than today's date"
-      }else if(moment(planObj.returnDate).isBefore(moment(planObj.departureDate), 'day')){
-        console.log(moment(planObj.departureDate));
-        console.log(moment(planObj.returnDate));
-        console.log(moment(planObj.returnDate).isBefore(moment(planObj.departureDate), 'day'));
-        errorsObj.returnDate = 'Return date should be greater than departure date'
-      }
-    }
-
-    if(!planObj.passengersCount || planObj.passengersCount < 1){
-      errorsObj.passengersCount = 'Enter number of passengers'
-    }
-
-    this.setState({ searchErrors: errorsObj });
-    return Object.keys(errorsObj).length === 0 && errorsObj.constructor === Object;
   }
 
   getOptions(input) {
@@ -147,12 +165,49 @@ class WidgetTravelPlan extends Component {
     return `${selectedValue.city}, ${selectedValue.country} (${selectedValue.code})`;
   }
 
+  updateLastSearched(){
+    fetchSearch().then((lastSearched) => {
+      if(lastSearched){
+        this.setState(() => {
+          return {
+            lastSearched
+          };
+        })
+      }
+    });
+  }
+
+  useLastSearched(){
+    const lastSearched = this.state.lastSearched;
+    if(lastSearched){
+      this.setState(() => {
+        return {
+          bookingType: lastSearched.bookingType,
+          origin: lastSearched.origin,
+          destination: lastSearched.destination,
+          departureDate: lastSearched.departureDate,
+          returnDate: lastSearched.returnDate,
+          passengersCount: lastSearched.passengersCount
+        };
+      })
+    }
+  }
+
+  componentDidMount(){
+    this.updateLastSearched();
+  }
+
+
   render() {
     const today = moment();
     const isReturn = this.state.bookingType === "return",
           originCode = this.state.origin? this.state.origin.code : '',
           destinationCode = this.state.destination? this.state.destination.code : '';
-    let searchErrors = this.state.searchErrors;
+    const { searchErrors, lastSearched } = this.state;
+    const bookingTypeTitle = {
+      oneway: "One Way",
+      return: "Round Trip",
+    };
 
     return (
       <div className={"widget travel-plan-widget" + (this.props.isActive ? " show" : "")}>
@@ -230,6 +285,20 @@ class WidgetTravelPlan extends Component {
             }
 
             <button type="submit" className="btn btn-search">Search Flights</button>
+            {
+              // Disabled due to an issue related to a bug in Select component
+              lastSearched &&
+              <div className="last-searched" onClick={this.useLastSearched.bind(this)}>
+                <label>Use Last Searched:</label>
+                <p>
+                  {bookingTypeTitle[lastSearched.bookingType]}, {lastSearched.origin.city} > {lastSearched.destination.city}
+                  {
+                    lastSearched.bookingType === 'return' &&
+                    <span> > {lastSearched.origin.city}</span>
+                  }
+                </p>
+              </div>
+            }
           </div>
         </form>
       </div>

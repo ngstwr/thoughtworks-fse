@@ -1,3 +1,16 @@
+.last-searched{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0.8;
+  border-bottom: 1px dotted rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+.last-searched > label, .last-searched > p{
+  margin: 0;
+}
 
 
 /* Select component css  */
