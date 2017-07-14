@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Select from 'react-select';
+import moment from 'moment';
 import AirportAPI from '../../apis/Airport';
 
 import 'react-select/dist/react-select.css';
@@ -98,6 +99,7 @@ class WidgetTravelPlan extends Component {
 
   validateForm(planObj){
     let errorsObj = {};
+    const today = moment();
 
     if(!planObj.origin){
       errorsObj.origin = 'Select your departure city'
@@ -109,10 +111,21 @@ class WidgetTravelPlan extends Component {
 
     if(!planObj.departureDate){
       errorsObj.departureDate = 'Select your departure date'
+    }else if(moment(planObj.departureDate).isBefore(today, 'day')){
+      errorsObj.departureDate = "Departure date can't be less than today's date"
     }
 
-    if(planObj.bookingType === 'return' && !planObj.returnDate){
-      errorsObj.returnDate = 'Select your return date'
+    if(planObj.bookingType === 'return'){
+      if(!planObj.returnDate){
+        errorsObj.returnDate = 'Select your return date'
+      }else if((moment(planObj.returnDate).isBefore(today, 'day'))){
+        errorsObj.returnDate = "Return date can't be less than today's date"
+      }else if(moment(planObj.returnDate).isBefore(moment(planObj.departureDate), 'day')){
+        console.log(moment(planObj.departureDate));
+        console.log(moment(planObj.returnDate));
+        console.log(moment(planObj.returnDate).isBefore(moment(planObj.departureDate), 'day'));
+        errorsObj.returnDate = 'Return date should be greater than departure date'
+      }
     }
 
     if(!planObj.passengersCount || planObj.passengersCount < 1){
@@ -135,6 +148,7 @@ class WidgetTravelPlan extends Component {
   }
 
   render() {
+    const today = moment();
     const isReturn = this.state.bookingType === "return",
           originCode = this.state.origin? this.state.origin.code : '',
           destinationCode = this.state.destination? this.state.destination.code : '';
@@ -142,7 +156,7 @@ class WidgetTravelPlan extends Component {
 
     return (
       <div className={"widget travel-plan-widget" + (this.props.isActive ? " show" : "")}>
-        <form className="widget-body" onSubmit={this.handleSubmit.bind(this)}>
+        <form className="widget-body" onSubmit={this.handleSubmit.bind(this)} noValidate>
           <div className="button-tabs">
             <button type="button" className={"btn btn-tab" + (isReturn ? "":" active")} onClick={this.toggleBookingType.bind(this, "oneway")}>One way</button>
             <button type="button" className={"btn btn-tab" + (isReturn ? " active":"")} onClick={this.toggleBookingType.bind(this, "return")}>Return</button>
@@ -178,7 +192,10 @@ class WidgetTravelPlan extends Component {
             </div>
             <div className="form-element">
               <label>Departure Date</label>
-              <input type="date" value={this.state.departureDate} placeholder="Departure Date"
+              <input type="date"
+                      min={today.format("YYYY-MM-DD")}
+                      value={this.state.departureDate}
+                      placeholder="Departure Date"
                       onChange={this.handleChange.bind(this, 'departureDate')} />
               { searchErrors.departureDate && <p className="error-label">{searchErrors.departureDate}</p> }
             </div>
